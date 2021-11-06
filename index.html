@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            background: linear-gradient(90deg,#000,#342f2f,#584646);
+        }
+        .videos{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100px;
+        }
+        .videos video{
+            box-shadow: 0 0 5px #000;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .videos button{
+            width: 150px;
+            height: 32px;
+            font-size: 17px;
+            background-color: darkcyan;
+            border: none;
+            outline: none;
+            border-radius: 2px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+    </style>
+    <title>Video Call</title>
+</head>
+<body>
+    <div class="videos">
+        <video src=""></video>
+        <button>Pause</button>
+    </div>
+
+
+    <script>
+        navigator.getUserMedia = navigator.getUserMedia ||
+                        navigator.webkitGetUserMedia ||
+                        navigator.mozGetUserMedia;
+
+if (navigator.getUserMedia) {
+navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
+    function(stream) {
+        var video = document.querySelector('video');
+        video.srcObject = stream;
+        var btn = document.querySelector('button')
+        btn.addEventListener("click",()=>{
+            if(video.paused){
+                video.play()
+                btn.innerText = "Pause"
+            }else{
+                video.pause()
+                btn.innerText = "Play"
+            }
+        })
+        video.onloadedmetadata = function(e) {
+        video.play();
+
+        };
+    },
+    function(err) {
+        console.log("The following error occurred: " + err.name);
+    }
+);
+} else {
+console.log("getUserMedia not supported");
+}
+    </script>
+</body>
+</html>
