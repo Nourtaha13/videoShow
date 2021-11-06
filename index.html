@@ -55,7 +55,7 @@
                         navigator.mozGetUserMedia;
 
 if (navigator.getUserMedia) {
-navigator.getUserMedia({ audio: true, video: { width: "90%", height: 720 } },
+navigator.getUserMedia({ audio: true, video: { height: 720 } },
     function(stream) {
         var video = document.querySelector('video');
         video.srcObject = stream;
